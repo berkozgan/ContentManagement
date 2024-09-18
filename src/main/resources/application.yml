@@ -1,4 +1,8 @@
 spring:
+  security:
+    user:
+      name: admin
+      password: 321
   application:
     name: demo
   datasource:
@@ -13,3 +17,5 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: 8090
+
+
