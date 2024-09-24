@@ -1,33 +1,30 @@
 package com.example.demo.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 
-@Configuration
-@EnableWebSecurity
 public class SecurityConfiguration {
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/index").permitAll() //add için auth gerek yok geri kalanı için var
-                        .anyRequest().authenticated()
-                )
-                .formLogin(withDefaults())
-                .logout(withDefaults());
 
-        return http.build();
+    /*
+    private static final String[] AUTH_WHITE_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/v2/api-docs/**",
+            "/swagger-resources/**",
+            "/api/users/add",
+            "/api/users/getAll"
+    };
+
+    @Bean
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+         http
+                .authorizeHttpRequests(auth -> auth
+
+                        .requestMatchers(AUTH_WHITE_LIST).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/add").permitAll()
+                        .anyRequest().authenticated()
+                );
+
+         return http.build();
     }
 
     @Bean
@@ -47,7 +44,10 @@ public class SecurityConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return NoOpPasswordEncoder.getInstance();
     }
+
+     */
 
 }

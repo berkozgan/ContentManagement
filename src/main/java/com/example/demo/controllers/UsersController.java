@@ -1,14 +1,11 @@
 package com.example.demo.controllers;
 
 import com.example.demo.DTOs.requests.CreateUserRequest;
+import com.example.demo.DTOs.requests.DeleteUserRequest;
 import com.example.demo.DTOs.responses.GetAllUsersResponse;
 import com.example.demo.services.IUserService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.Data;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +33,11 @@ public class UsersController {
     @GetMapping("/dashboard")
     public String dashboard(){
         return "login başarılı, dashboard sayfası";
+    }
+
+    @DeleteMapping("/remove")
+    public void remove(@RequestBody DeleteUserRequest deleteUserRequest) {
+        userService.delete(deleteUserRequest);
     }
 
 

@@ -1,15 +1,14 @@
 package com.example.demo.services;
 
 import com.example.demo.DTOs.requests.CreateUserRequest;
+import com.example.demo.DTOs.requests.DeleteUserRequest;
 import com.example.demo.DTOs.responses.GetAllUsersResponse;
 import com.example.demo.Entities.User;
 import com.example.demo.mapping.ModelMapperService;
 import com.example.demo.repository.IUserRepository;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +57,13 @@ public class UserManager implements IUserService {
         User user = this.modelMapperService.forRequest().map(createUserRequest, User.class);
         this.userRepository.save(user);
     }
+
+    @Override
+    public void delete(DeleteUserRequest deleteUserRequest) {//??
+        User user = this.modelMapperService.forRequest().map(deleteUserRequest, User.class);
+        this.userRepository.delete(user);
+    }
+
 
 
 
