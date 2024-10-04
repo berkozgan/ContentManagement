@@ -1,5 +1,6 @@
 package com.example.demo.Entities;
 
+import com.example.demo.DTOs.requests.CreateUserRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -11,11 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BaseEntity<CreateUserRequest, User> {
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -38,12 +35,6 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     Role role;
-
-    public User(long id, String username){
-        super();
-        this.id=id;
-        this.username=username;
-    }
 
 
 

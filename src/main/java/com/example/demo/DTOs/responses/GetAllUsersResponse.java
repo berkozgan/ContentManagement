@@ -1,5 +1,6 @@
 package com.example.demo.DTOs.responses;
 
+import com.example.demo.DTOs.BaseDTO;
 import com.example.demo.Entities.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllUsersResponse {
+public class GetAllUsersResponse extends BaseDTO {
     private Long id;
     private String username;
     private String firstName;

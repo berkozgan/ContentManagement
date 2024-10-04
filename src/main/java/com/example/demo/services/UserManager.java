@@ -1,10 +1,10 @@
 package com.example.demo.services;
 
 import com.example.demo.DTOs.requests.CreateUserRequest;
-import com.example.demo.DTOs.requests.DeleteUserRequest;
 import com.example.demo.DTOs.responses.GetAllUsersResponse;
 import com.example.demo.Entities.User;
 import com.example.demo.mapping.ModelMapperService;
+import com.example.demo.mapping.UserMapper;
 import com.example.demo.repository.IUserRepository;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @Data
 public class UserManager implements IUserService {
 
+
     private final IUserRepository userRepository;
     private  final ModelMapperService modelMapperService;
 
@@ -23,45 +24,39 @@ public class UserManager implements IUserService {
 
     @Override
     public List<GetAllUsersResponse> getAll() {
+
         List<User> users = userRepository.findAll();
-        /*List<GetAllUsersResponse> usersResponse = new ArrayList<GetAllUsersResponse>();
-        for (User user : users) {
-            GetAllUsersResponse ResponseItem = new GetAllUsersResponse();
-            ResponseItem.setId(user.getId());
-            ResponseItem.setUsername(user.getUsername());
-            ResponseItem.setFirstName(user.getFirstName());
-            ResponseItem.setLastName(user.getLastName());
-            ResponseItem.setEmailAddress(user.getEmailAddress());
-            ResponseItem.setTeamCode(user.getTeamCode());
-            ResponseItem.setRole(user.getRole());
-            usersResponse.add(ResponseItem);
-        }*/
+
         List<GetAllUsersResponse> usersResponse = users.stream()
-                .map(user -> this.modelMapperService.forResponse()
-                        .map(user, GetAllUsersResponse.class)).collect(Collectors.toList());
+                .map(user -> {
+                    GetAllUsersResponse response = new GetAllUsersResponse();
+                    response.setId(user.getId());
+                    response.setFirstName(user.getFirstName());
+                    response.setLastName(user.getLastName());
+                    response.setUsername(user.getUsername());
+                    response.setEmailAddress(user.getEmailAddress());
+                    response.setTeamCode(user.getTeamCode());
+                    response.setRole(user.getRole());
+                    return response;
+                }).collect(Collectors.toList());
+
 
         return usersResponse;
     }
 
+
     @Override
     public void add(CreateUserRequest createUserRequest) {
-        /*User user = new User();
-        user.setUsername(createUserRequest.getUsername());
-        user.setFirstName(createUserRequest.getFirstName());
-        user.setLastName(createUserRequest.getLastName());
-        user.setEmailAddress(createUserRequest.getEmailAddress());
-        user.setTeamCode(createUserRequest.getTeamCode());
-        user.setRole(createUserRequest.getRole());
-        user.setPassword(createUserRequest.getPassword());
-*/
-        User user = this.modelMapperService.forRequest().map(createUserRequest, User.class);
-        this.userRepository.save(user);
+        User userEntity = new User().fromDTO(createUserRequest, UserMapper.class);
+        this.userRepository.save(userEntity);
+
     }
 
     @Override
-    public void delete(DeleteUserRequest deleteUserRequest) {//??
-        User user = this.modelMapperService.forRequest().map(deleteUserRequest, User.class);
-        this.userRepository.delete(user);
+    public void removeById(Long id) {
+        User user = this.userRepository.findById(id).orElse(null);
+        this.userRepository.deleteById(id);
+
     }
 
 

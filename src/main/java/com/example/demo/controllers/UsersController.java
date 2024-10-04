@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.DTOs.requests.CreateUserRequest;
-import com.example.demo.DTOs.requests.DeleteUserRequest;
 import com.example.demo.DTOs.responses.GetAllUsersResponse;
 import com.example.demo.services.IUserService;
 import lombok.Data;
@@ -21,6 +20,7 @@ public class UsersController {
     public List<GetAllUsersResponse> getAll() {
         return userService.getAll();
     }
+
     @PostMapping("/add")
     public void add(@RequestBody CreateUserRequest createUserRequest) {
         userService.add(createUserRequest);
@@ -36,8 +36,8 @@ public class UsersController {
     }
 
     @DeleteMapping("/remove")
-    public void remove(@RequestBody DeleteUserRequest deleteUserRequest) {
-        userService.delete(deleteUserRequest);
+    public void remove(Long id) {
+        userService.removeById(id);
     }
 
 
