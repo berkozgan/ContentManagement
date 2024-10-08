@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.DTOs.requests.AddTutorialRequest;
-import com.example.demo.DTOs.responses.GetAllTutorials;
+import com.example.demo.DTOs.responses.GetAllTutorialsResponse;
 import com.example.demo.services.ITutorialService;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class TutorialsController {
     }
 
     @GetMapping("/getAllTutorial")
-    public List<GetAllTutorials> getAll() {
+    public List<GetAllTutorialsResponse> getAll() {
         return tutorialService.getAllTutorials();
     }
 

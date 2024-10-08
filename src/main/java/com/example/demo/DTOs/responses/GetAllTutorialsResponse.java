@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllTutorials extends BaseDTO {
+public class GetAllTutorialsResponse extends BaseDTO {
+    private Long id;
     private String title;
     private String url;
+    private String instructor;
+    private String createdBy;
 }

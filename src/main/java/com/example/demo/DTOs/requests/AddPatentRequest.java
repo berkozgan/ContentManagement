@@ -1,7 +1,6 @@
 package com.example.demo.DTOs.requests;
 
 import com.example.demo.DTOs.BaseDTO;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddTutorialRequest extends BaseDTO {
+public class AddPatentRequest  {
+    private String owner;
     private String title;
-    private String url;
-    private String instructor;
+    private String description;
     private String createdBy;
-
 
 }

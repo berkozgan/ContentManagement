@@ -9,6 +9,8 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import org.mapstruct.factory.Mappers;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -17,6 +19,7 @@ public abstract class BaseEntity <T extends BaseDTO, S extends BaseEntity<T,S>> 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
 
     public static <T extends BaseDTO, S extends BaseEntity>
     List<T> toDTOList(List<S> entityList,

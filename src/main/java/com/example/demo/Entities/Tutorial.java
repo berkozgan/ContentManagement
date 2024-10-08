@@ -14,9 +14,17 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "tutorials")
 public class Tutorial extends BaseEntity<AddTutorialRequest, Tutorial> {
 
+    @Column(nullable = false)
+    private String instructor;
+
     @Column(nullable = false, unique = true)
     private String title;
 
     @Column(nullable = false, unique = true)
-    private  String url; //?
+    private  String url;
+
+    @Column(nullable = false)
+    private String createdBy;
+
+
 }

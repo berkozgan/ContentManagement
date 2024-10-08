@@ -1,35 +1,33 @@
 package com.example.demo.Entities;
 
+import com.example.demo.DTOs.requests.AddConferenceRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "patents")
+@Table(name = "conferences")
 @Entity
-public class Patent extends BaseEntity{
-
+public class Conference extends BaseEntity<AddConferenceRequest, Conference> {
     @Column(nullable = false)
-    private String owner;
+    private String author;
 
     @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
-    private String description;
+    private String url;
 
     @Column(nullable = false)
     private String createdBy;
 
+
     //createdBy
     //createdDate
-
 }

@@ -1,17 +1,13 @@
 package com.example.demo.services;
 
 import com.example.demo.DTOs.requests.AddTutorialRequest;
-import com.example.demo.DTOs.responses.GetAllTutorials;
-import com.example.demo.DTOs.responses.GetAllUsersResponse;
+import com.example.demo.DTOs.responses.GetAllTutorialsResponse;
 import com.example.demo.Entities.Tutorial;
-import com.example.demo.Entities.User;
-import com.example.demo.mapping.ModelMapperService;
 import com.example.demo.mapping.TutorialMapper;
 import com.example.demo.repository.ITutorialRepository;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +20,7 @@ public class TutorialManager implements ITutorialService{
     @Override
     public void addTutorial(AddTutorialRequest addTutorialRequest) {
         Tutorial tutorial = new Tutorial().fromDTO(addTutorialRequest, TutorialMapper.class);
+        this.tutorialRepository.save(tutorial);
 
     }
 
@@ -35,14 +32,17 @@ public class TutorialManager implements ITutorialService{
     }
 
     @Override
-    public List<GetAllTutorials> getAllTutorials() {
+    public List<GetAllTutorialsResponse> getAllTutorials() {
         List<Tutorial> tutorials = tutorialRepository.findAll();
 
-        List<GetAllTutorials> tutorialRequests = tutorials.stream()
+        List<GetAllTutorialsResponse> tutorialRequests = tutorials.stream()
                 .map(tutorial -> {
-                    GetAllTutorials request = new GetAllTutorials();
+                    GetAllTutorialsResponse request = new GetAllTutorialsResponse();
                     request.setTitle(tutorial.getTitle());
                     request.setUrl(tutorial.getUrl());
+                    request.setInstructor(tutorial.getInstructor());
+                    request.setCreatedBy(tutorial.getCreatedBy());
+                    request.setId(tutorial.getId());
                     return request;
                 }).collect(Collectors.toList());
         return tutorialRequests;
