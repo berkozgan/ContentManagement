@@ -1,5 +1,6 @@
 package com.example.demo.Entities;
 
+import com.example.demo.DTOs.requests.AddPatentRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -15,7 +16,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "patents")
 @Entity
-public class Patent extends BaseEntity{
+public class Patent extends BaseEntity<AddPatentRequest, Patent>{
 
     @Column(nullable = false)
     private String owner;

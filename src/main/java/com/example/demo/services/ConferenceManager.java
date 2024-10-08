@@ -33,16 +33,16 @@ public class ConferenceManager implements IConferenceService{
     @Override
     public List<GetAllConferencesResponse> getAllConferences() {
         List<Conference> conferences = conferenceRepository.findAll();
-        List<GetAllConferencesResponse> conferenceRequests = conferences.stream()
+        List<GetAllConferencesResponse> conferencesResponses = conferences.stream()
                 .map(conference -> {
-                    GetAllConferencesResponse request = new GetAllConferencesResponse();
-                    request.setId(conference.getId());
-                    request.setTitle(conference.getTitle());
-                    request.setUrl(conference.getUrl());
-                    request.setAuthor(conference.getAuthor());
-                    request.setCreatedBy(conference.getCreatedBy());
-                    return request;
+                    GetAllConferencesResponse response = new GetAllConferencesResponse();
+                    response.setId(conference.getId());
+                    response.setTitle(conference.getTitle());
+                    response.setUrl(conference.getUrl());
+                    response.setAuthor(conference.getAuthor());
+                    response.setCreatedBy(conference.getCreatedBy());
+                    return response;
                 }).collect(Collectors.toList());
-        return conferenceRequests;
+        return conferencesResponses;
     }
 }

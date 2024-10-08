@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddPatentRequest  {
+public class AddPatentRequest extends BaseDTO {
     private String owner;
     private String title;
     private String description;

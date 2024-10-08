@@ -35,16 +35,16 @@ public class TutorialManager implements ITutorialService{
     public List<GetAllTutorialsResponse> getAllTutorials() {
         List<Tutorial> tutorials = tutorialRepository.findAll();
 
-        List<GetAllTutorialsResponse> tutorialRequests = tutorials.stream()
+        List<GetAllTutorialsResponse> tutorialsResponses = tutorials.stream()
                 .map(tutorial -> {
-                    GetAllTutorialsResponse request = new GetAllTutorialsResponse();
-                    request.setTitle(tutorial.getTitle());
-                    request.setUrl(tutorial.getUrl());
-                    request.setInstructor(tutorial.getInstructor());
-                    request.setCreatedBy(tutorial.getCreatedBy());
-                    request.setId(tutorial.getId());
-                    return request;
+                    GetAllTutorialsResponse response = new GetAllTutorialsResponse();
+                    response.setTitle(tutorial.getTitle());
+                    response.setUrl(tutorial.getUrl());
+                    response.setInstructor(tutorial.getInstructor());
+                    response.setCreatedBy(tutorial.getCreatedBy());
+                    response.setId(tutorial.getId());
+                    return response;
                 }).collect(Collectors.toList());
-        return tutorialRequests;
+        return tutorialsResponses;
     }
 }
