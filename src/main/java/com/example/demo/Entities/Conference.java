@@ -7,6 +7,8 @@ import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -28,6 +30,6 @@ public class Conference extends BaseEntity<AddConferenceRequest, Conference> {
     private String createdBy;
 
 
-    //createdBy
-    //createdDate
+    @Column(nullable = false)
+    private LocalDateTime createdDateTime;
 }

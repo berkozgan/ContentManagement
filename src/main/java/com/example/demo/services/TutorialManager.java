@@ -8,6 +8,7 @@ import com.example.demo.repository.ITutorialRepository;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ public class TutorialManager implements ITutorialService{
     @Override
     public void addTutorial(AddTutorialRequest addTutorialRequest) {
         Tutorial tutorial = new Tutorial().fromDTO(addTutorialRequest, TutorialMapper.class);
+        tutorial.setCreatedDateTime(LocalDateTime.now());
         this.tutorialRepository.save(tutorial);
 
     }
@@ -43,6 +45,7 @@ public class TutorialManager implements ITutorialService{
                     response.setInstructor(tutorial.getInstructor());
                     response.setCreatedBy(tutorial.getCreatedBy());
                     response.setId(tutorial.getId());
+                    response.setCreatedDateTime(tutorial.getCreatedDateTime());
                     return response;
                 }).collect(Collectors.toList());
         return tutorialsResponses;

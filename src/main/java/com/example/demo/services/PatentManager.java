@@ -9,6 +9,7 @@ import com.example.demo.repository.IPatentRepository;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ public class PatentManager implements IPatentService {
     @Override
     public void addPatent(AddPatentRequest addPatentRequest) {
         Patent patent = new Patent().fromDTO(addPatentRequest, PatentMapper.class);
+        patent.setCreatedDateTime(LocalDateTime.now());
         this.patentRepository.save(patent);
     }
 
@@ -43,6 +45,7 @@ public class PatentManager implements IPatentService {
                     response.setDescription(patent.getDescription());
                     response.setOwner(patent.getOwner());
                     response.setCreatedBy(patent.getCreatedBy());
+                    response.setCreatedDateTime(patent.getCreatedDateTime());
                     return response;
                 }).collect(Collectors.toList());
         return patentsResponses;

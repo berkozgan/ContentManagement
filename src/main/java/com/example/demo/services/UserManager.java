@@ -9,6 +9,7 @@ import com.example.demo.repository.IUserRepository;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,7 @@ public class UserManager implements IUserService {
                     response.setEmailAddress(user.getEmailAddress());
                     response.setTeamCode(user.getTeamCode());
                     response.setRole(user.getRole());
+                    response.setCreatedDateTime(user.getCreatedDateTime());
                     return response;
                 }).collect(Collectors.toList());
 
@@ -48,6 +50,7 @@ public class UserManager implements IUserService {
     @Override
     public void add(CreateUserRequest createUserRequest) {
         User userEntity = new User().fromDTO(createUserRequest, UserMapper.class);
+        userEntity.setCreatedDateTime(LocalDateTime.now());
         this.userRepository.save(userEntity);
 
     }

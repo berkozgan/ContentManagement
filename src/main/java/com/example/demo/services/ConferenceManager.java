@@ -8,6 +8,7 @@ import com.example.demo.repository.IConferenceRepository;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,7 @@ public class ConferenceManager implements IConferenceService{
     @Override
     public void addConference(AddConferenceRequest addConferenceRequest) {
         Conference conference = new Conference().fromDTO(addConferenceRequest, ConferenceMapper.class);
+        conference.setCreatedDateTime(LocalDateTime.now());
         this.conferenceRepository.save(conference);
 
     }
@@ -41,6 +43,7 @@ public class ConferenceManager implements IConferenceService{
                     response.setUrl(conference.getUrl());
                     response.setAuthor(conference.getAuthor());
                     response.setCreatedBy(conference.getCreatedBy());
+                    response.setCreatedDateTime(conference.getCreatedDateTime());
                     return response;
                 }).collect(Collectors.toList());
         return conferencesResponses;

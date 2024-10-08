@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -30,7 +31,7 @@ public class Patent extends BaseEntity<AddPatentRequest, Patent>{
     @Column(nullable = false)
     private String createdBy;
 
-    //createdBy
-    //createdDate
+    @Column(nullable = false)
+    private LocalDateTime createdDateTime;
 
 }

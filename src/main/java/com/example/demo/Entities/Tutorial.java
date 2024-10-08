@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -25,6 +27,9 @@ public class Tutorial extends BaseEntity<AddTutorialRequest, Tutorial> {
 
     @Column(nullable = false)
     private String createdBy;
+
+    @Column(nullable = false)
+    private LocalDateTime createdDateTime;
 
 
 }

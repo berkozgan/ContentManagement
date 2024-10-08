@@ -20,5 +20,7 @@ public class CreateUserRequest extends BaseDTO {
     private String password;
     private String teamCode;
     Role role;
+    private LocalDateTime createdDateTime;
+
 
 }

@@ -38,5 +38,8 @@ public class User extends BaseEntity<CreateUserRequest, User> {
     @JoinColumn(name = "role_id", nullable = false)
     Role role;
 
+    @Column(nullable = false)
+    private LocalDateTime createdDateTime;
+
 
 }
