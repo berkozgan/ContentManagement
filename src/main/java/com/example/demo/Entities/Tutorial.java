@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -30,6 +31,9 @@ public class Tutorial extends BaseEntity<AddTutorialRequest, Tutorial> {
 
     @Column(nullable = false)
     private LocalDateTime createdDateTime;
+
+    @OneToMany(mappedBy = "tutorial", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
 
 }

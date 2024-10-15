@@ -1,13 +1,12 @@
 package com.example.demo.Entities;
 
 import com.example.demo.DTOs.requests.AddConferenceRequest;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -29,7 +28,9 @@ public class Conference extends BaseEntity<AddConferenceRequest, Conference> {
     @Column(nullable = false)
     private String createdBy;
 
-
     @Column(nullable = false)
     private LocalDateTime createdDateTime;
+
+    @OneToMany(mappedBy = "conference", cascade = CascadeType.ALL) //null donerse arrayliste çevir
+    private List<Comment> comments;
 }

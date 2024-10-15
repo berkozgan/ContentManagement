@@ -1,9 +1,7 @@
 package com.example.demo.Entities;
 
 import com.example.demo.DTOs.requests.AddPatentRequest;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -33,5 +31,8 @@ public class Patent extends BaseEntity<AddPatentRequest, Patent>{
 
     @Column(nullable = false)
     private LocalDateTime createdDateTime;
+
+    @OneToMany(mappedBy = "patent", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
 }
