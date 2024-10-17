@@ -15,4 +15,5 @@ public class GetAllCommentsResponse extends BaseDTO {
     private String content;
     private String username;
     private LocalDateTime createdDateTime;
+    private int rating;
 }

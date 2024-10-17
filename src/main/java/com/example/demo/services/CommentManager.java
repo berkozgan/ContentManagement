@@ -32,6 +32,7 @@ public class CommentManager implements ICommentService{
 
         Comment comment = new Comment();
         comment.setContent(createCommentRequest.getContent());
+        comment.setRating(createCommentRequest.getRating());
         comment.setUser(user);
         comment.setConference(conference);
         comment.setCreatedDateTime(LocalDateTime.now());
@@ -50,6 +51,7 @@ public class CommentManager implements ICommentService{
 
         Comment comment = new Comment();
         comment.setContent(createCommentRequest.getContent());
+        comment.setRating(createCommentRequest.getRating());
         comment.setUser(user);
         comment.setPatent(patent);
         comment.setCreatedDateTime(LocalDateTime.now());
@@ -68,6 +70,7 @@ public class CommentManager implements ICommentService{
 
         Comment comment = new Comment();
         comment.setContent(createCommentRequest.getContent());
+        comment.setRating(createCommentRequest.getRating());
         comment.setUser(user);
         comment.setTutorial(tutorial);
         comment.setCreatedDateTime(LocalDateTime.now());
@@ -91,7 +94,7 @@ public class CommentManager implements ICommentService{
 
         List<Comment> comments = conference.getComments();
         return comments.stream()
-                .map(comment -> new GetAllCommentsResponse(comment.getId(), comment.getContent(), comment.getUser().getUsername(), comment.getCreatedDateTime()))
+                .map(comment -> new GetAllCommentsResponse(comment.getId(), comment.getContent(), comment.getUser().getUsername(), comment.getCreatedDateTime(),comment.getRating()))
                 .collect(Collectors.toList());
 
 
@@ -104,7 +107,7 @@ public class CommentManager implements ICommentService{
 
         List<Comment> comments = patent.getComments();
         return comments.stream()
-                .map(comment -> new GetAllCommentsResponse(comment.getId(), comment.getContent(), comment.getUser().getUsername(), comment.getCreatedDateTime()))
+                .map(comment -> new GetAllCommentsResponse(comment.getId(), comment.getContent(), comment.getUser().getUsername(), comment.getCreatedDateTime(), comment.getRating()))
                 .collect(Collectors.toList());
     }
 
@@ -117,7 +120,7 @@ public class CommentManager implements ICommentService{
 
         List<Comment> comments = tutorial.getComments();
         return comments.stream()
-                .map(comment -> new GetAllCommentsResponse(comment.getId(), comment.getContent(), comment.getUser().getUsername(), comment.getCreatedDateTime()))
+                .map(comment -> new GetAllCommentsResponse(comment.getId(), comment.getContent(), comment.getUser().getUsername(), comment.getCreatedDateTime(), comment.getRating()))
                 .collect(Collectors.toList());
     }
 

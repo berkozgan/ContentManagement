@@ -2,6 +2,8 @@ package com.example.demo.Entities;
 
 import com.example.demo.DTOs.requests.CreateCommentRequest;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -16,11 +18,16 @@ import java.time.LocalDateTime;
 @Table(name = "comments")
 public class Comment extends BaseEntity<CreateCommentRequest, Comment> {
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String content;
 
     @Column(nullable = false)
     private LocalDateTime createdDateTime;
+
+    @Min(1)
+    @Max(5)
+    @Column(nullable = false)
+    private int rating;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -37,6 +44,8 @@ public class Comment extends BaseEntity<CreateCommentRequest, Comment> {
     @ManyToOne
     @JoinColumn(name = "patent_id", nullable = true)
     private Patent patent;
+
+
 
 
 }

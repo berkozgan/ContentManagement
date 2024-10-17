@@ -7,6 +7,7 @@ import com.example.demo.services.ICommentService;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,19 +19,19 @@ public class CommentsController {
     private final ICommentService commentService;
 
     @PostMapping("/addCommentToConference/{conferenceId}")
-    public ResponseEntity<String> addCommentToConference(@PathVariable Long conferenceId, @RequestBody CreateCommentRequest createCommentrRequest) {
+    public ResponseEntity<String> addCommentToConference(@PathVariable Long conferenceId, @RequestBody @Validated CreateCommentRequest createCommentrRequest) {
         commentService.addCommentToConference(conferenceId, createCommentrRequest);
         return ResponseEntity.ok("Comment added to conference");
     }
 
     @PostMapping("/addCommentToPatent/{patentId}")
-    public ResponseEntity<String> addCommentToPatent(@PathVariable Long patentId, @RequestBody CreateCommentRequest createCommentRequest) {
+    public ResponseEntity<String> addCommentToPatent(@PathVariable Long patentId, @RequestBody @Validated CreateCommentRequest createCommentRequest) {
         commentService.addCommentToPatent(patentId, createCommentRequest);
         return ResponseEntity.ok("Comment added to patent");
     }
 
     @PostMapping("/addCommentToTutorial/{tutorialId}")
-    public ResponseEntity<String> addCommentToTutorial(@PathVariable Long tutorialId, @RequestBody CreateCommentRequest createCommentRequest) {
+    public ResponseEntity<String> addCommentToTutorial(@PathVariable Long tutorialId, @RequestBody @Validated CreateCommentRequest createCommentRequest) {
         commentService.addCommentToTutorial(tutorialId, createCommentRequest);
         return ResponseEntity.ok("Comment added to tutorial");
     }
