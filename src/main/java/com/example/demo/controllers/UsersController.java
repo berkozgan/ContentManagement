@@ -16,6 +16,7 @@ public class UsersController {
     private final IUserService userService;
 
 
+    @CrossOrigin(origins = "*", maxAge = 3600)
     @GetMapping("/getAll")
     public List<GetAllUsersResponse> getAll() {
         return userService.getAll();
